@@ -51,6 +51,9 @@ namespace Timer
             StringBuilder lpReturnedString, int nSize, string lpFileName);
             [DllImport("kernel32")]
             private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
+
+           
+
             public IniFile(string filename)
             {
                 FFileName = filename;
@@ -83,6 +86,30 @@ namespace Timer
             }
         }
         //ini文件类
+        //点击穿越
+        public enum GWL
+        {
+            ExStyle = -20
+        }
+
+        public enum WS_EX
+        {
+            Transparent = 0x20,
+            Layered = 0x80000
+        }
+
+        public enum LWA
+        {
+            ColorKey = 0x1,
+            Alpha = 0x2
+        }
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
+        public static extern int GetWindowLong(IntPtr hWnd, GWL nIndex);
+        [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
+        public static extern int SetWindowLong(IntPtr hWnd, GWL nIndex, int dwNewLong);
+        [DllImport("user32.dll", EntryPoint = "SetLayeredWindowAttributes")]
+        public static extern bool SetLayeredWindowAttributes(IntPtr hWnd, int crKey, byte alpha, LWA dwFlags);
+        //点击穿越
 
         HotKeys h = new HotKeys();
         const int WM_KEYDOWN = 0x0100;
@@ -132,15 +159,19 @@ namespace Timer
             fhotkeyChange();
             tPRG = new Thread(tPRGsub);
             tPRG.Start();
+            prgBack.Parent = this;
+            prgFront.Parent = prgBack;
+            labUserInput.Parent = prgBack;
+            //prgFront.SendToBack();
         }
 
         private void tPRGsub()
         {
             {
-                if (prgCount.InvokeRequired)
+                if (prgFront.InvokeRequired)
                 {
                     DoDataDelegate d = tPRGsub;
-                    prgCount.Invoke(d);
+                    prgFront.Invoke(d);
                 }
                 else
                 {
@@ -149,15 +180,15 @@ namespace Timer
                         Application.DoEvents();
                         if (System.Environment.TickCount -  iTime < 4000*iTimeCount)
                         {
-                            prgCount.Value = prgCount.Value-2;
-                            Thread.Sleep(80);
+                            prgFront.Left = prgFront.Left - 2;
+                            Thread.Sleep(40);
                         }
                         else
                         {
                             iCOEi = iCOEi + 1;
                             if (iCOEi > iCOEmax) { iCOEi = 0; }
                             sCOElab();  //推送到label显示系别
-                            prgCount.Value = 100;
+                            prgFront.Left = 0;
                             iTimeCount = iTimeCount + 1;
                         }
 
@@ -213,36 +244,43 @@ namespace Timer
                 case 0:
                     labUserInput.Text = "奥术";
                     labUserInput.ForeColor = System.Drawing.Color.Purple;
+                    prgFront.BackColor = System.Drawing.Color.Purple;
                     fPlaySound("奥术");
                     break;
                 case 1:
                     labUserInput.Text = "冰霜";
                     labUserInput.ForeColor = System.Drawing.Color.DeepSkyBlue;
+                    prgFront.BackColor = System.Drawing.Color.DeepSkyBlue;
                     fPlaySound("冰霜");
                     break;
                 case 2:
                     labUserInput.Text = "火焰";
                     labUserInput.ForeColor = System.Drawing.Color.Red;
+                    prgFront.BackColor = System.Drawing.Color.Red;
                     fPlaySound("火焰");
                     break;
                 case 3:
                     labUserInput.Text = "神圣";
                     labUserInput.ForeColor = System.Drawing.Color.Yellow;
+                    prgFront.BackColor = System.Drawing.Color.Yellow;
                     fPlaySound("神圣");
                     break;
                 case 4:
                     labUserInput.Text = "闪电";
                     labUserInput.ForeColor = System.Drawing.Color.White;
+                    prgFront.BackColor = System.Drawing.Color.White;
                     fPlaySound("闪电");
                     break;
                 case 5:
                     labUserInput.Text = "物理";
                     labUserInput.ForeColor = System.Drawing.Color.Gray;
+                    prgFront.BackColor = System.Drawing.Color.Gray;
                     fPlaySound("物理");
                     break;
                 case 6:
                     labUserInput.Text = "毒性";
                     labUserInput.ForeColor = System.Drawing.Color.Green;
+                    prgFront.BackColor = System.Drawing.Color.Green;
                     fPlaySound("毒性");
                     break;
             }
@@ -294,6 +332,7 @@ namespace Timer
             switch (m.Msg)
             {
                 case WM_HOTKEY:
+                    if (this.Height == 25) { btnCilckThrough_Click(null, null); return; }
                     btnReset_Click(null, null);//调用主处理程序
                     break;
             }
@@ -322,7 +361,7 @@ namespace Timer
 
         private void sReset()
         {
-            prgCount.Value = 100;
+            prgFront.Left = 0;
             iTime = System.Environment.TickCount;
             iTimeCount = 1;
             sCOElab();
@@ -340,6 +379,8 @@ namespace Timer
 
         private void sFormClose()
         {
+            Application.Exit();
+            Environment.Exit(0);
             try
             {
                 UnregisterHotKey(Handle, keyid);
@@ -348,15 +389,15 @@ namespace Timer
             {
 
             }
-            try
-            {
-                tPRG.Abort();
-            }
-            catch
-            {
+            //try
+            //{
+            //    tPRG.Abort();
+            //}
+            //catch
+            //{
 
-            }
-            //防止退出线程未关闭
+            //}
+            ////防止退出线程未关闭
         }
 
         private void topToolStripMenuItem_Click(object sender, EventArgs e)
@@ -471,10 +512,43 @@ namespace Timer
             iniwrite();
         }
 
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sFormClose();
+        }
+
+        private void btnCilckThrough_Click(object sender, EventArgs e)
+        {
+            if (this.Height == 25)
+            {
+                this.Height = 150;
+                base.OnShown(e);
+                int wl = GetWindowLong(this.Handle, GWL.ExStyle);
+                wl = wl | 0x80000 | 0x20;
+                SetWindowLong(this.Handle, GWL.ExStyle, wl);
+                SetLayeredWindowAttributes(this.Handle, 0, 128, LWA.Alpha);
+                this.Opacity = 0.8;
+                this.Opacity = 1;
+                this.TopMost = false;
+            }
+            else
+            {
+                base.OnShown(e);
+                int wl = GetWindowLong(this.Handle, GWL.ExStyle);
+                wl = wl | 0x80000 | 0x20;
+                SetWindowLong(this.Handle, GWL.ExStyle, wl);
+                SetLayeredWindowAttributes(this.Handle, 0, 128, LWA.Alpha);
+                this.Height = 25;
+                this.TopMost = true;
+                //this.Opacity = 0.8;
+            }
+        }
+
+
         private void labUserInput_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (this.Height == 153) { this.Height = 73; }
-            else {this.Height = 153; }
+            if (this.Height == 150) { this.Height = 25; }
+            else {this.Height = 150; }
         }
     }
 }

@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="D3COE Timer.exe" size="55296">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="D3COE Timer.exe" size="56832">
       <assemblyIdentity name="D3COE Timer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>G/tKi0fF9SDp66J6Zp8pK0bA+kex0Z1cVjL6gIw5CZA=</dsig:DigestValue>
+        <dsig:DigestValue>A7jTDOT2mJpd5xgahQ+ObAP0ThM2dAllDd5MBBcX5Ns=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

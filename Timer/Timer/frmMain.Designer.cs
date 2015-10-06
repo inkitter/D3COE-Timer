@@ -48,11 +48,15 @@
             this.topToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labUserInput = new System.Windows.Forms.Label();
-            this.prgCount = new System.Windows.Forms.ProgressBar();
             this.txtHotKey = new System.Windows.Forms.TextBox();
             this.btnSaveSetting = new System.Windows.Forms.Button();
             this.timPRG = new System.Windows.Forms.Timer(this.components);
             this.lstChar = new System.Windows.Forms.ListView();
+            this.btnCilckThrough = new System.Windows.Forms.Button();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.秘术师ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prgBack = new System.Windows.Forms.Label();
+            this.prgFront = new System.Windows.Forms.Label();
             this.MnuRBC.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +67,7 @@
             this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Violet;
             this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReset.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(173, 38);
+            this.btnReset.Location = new System.Drawing.Point(145, 28);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(55, 30);
             this.btnReset.TabIndex = 2;
@@ -78,9 +82,11 @@
             this.MnuRBC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem,
             this.topToolStripMenuItem,
-            this.transparentToolStripMenuItem});
+            this.transparentToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.秘术师ToolStripMenuItem});
             this.MnuRBC.Name = "MnuRBC";
-            this.MnuRBC.Size = new System.Drawing.Size(147, 70);
+            this.MnuRBC.Size = new System.Drawing.Size(147, 98);
             // 
             // exitToolStripMenuItem
             // 
@@ -107,32 +113,21 @@
             // 
             // labUserInput
             // 
+            this.labUserInput.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labUserInput.BackColor = System.Drawing.Color.Transparent;
             this.labUserInput.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labUserInput.Location = new System.Drawing.Point(59, 38);
+            this.labUserInput.Location = new System.Drawing.Point(69, 0);
             this.labUserInput.Name = "labUserInput";
-            this.labUserInput.Size = new System.Drawing.Size(67, 30);
+            this.labUserInput.Size = new System.Drawing.Size(67, 25);
             this.labUserInput.TabIndex = 3;
             this.labUserInput.Text = "lab";
             this.labUserInput.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labUserInput.UseMnemonic = false;
             this.labUserInput.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
             // 
-            // prgCount
-            // 
-            this.prgCount.Enabled = false;
-            this.prgCount.Location = new System.Drawing.Point(3, 3);
-            this.prgCount.MarqueeAnimationSpeed = 10;
-            this.prgCount.Name = "prgCount";
-            this.prgCount.Size = new System.Drawing.Size(227, 29);
-            this.prgCount.TabIndex = 22;
-            this.prgCount.Value = 100;
-            this.prgCount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ffrmmousedown);
-            this.prgCount.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ffrmmousemove);
-            // 
             // txtHotKey
             // 
-            this.txtHotKey.Location = new System.Drawing.Point(194, 74);
+            this.txtHotKey.Location = new System.Drawing.Point(105, 28);
             this.txtHotKey.Name = "txtHotKey";
             this.txtHotKey.ReadOnly = true;
             this.txtHotKey.Size = new System.Drawing.Size(34, 21);
@@ -143,7 +138,7 @@
             // 
             // btnSaveSetting
             // 
-            this.btnSaveSetting.Location = new System.Drawing.Point(185, 101);
+            this.btnSaveSetting.Location = new System.Drawing.Point(96, 55);
             this.btnSaveSetting.Name = "btnSaveSetting";
             this.btnSaveSetting.Size = new System.Drawing.Size(43, 19);
             this.btnSaveSetting.TabIndex = 20;
@@ -154,10 +149,11 @@
             // lstChar
             // 
             this.lstChar.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.lstChar.AutoArrange = false;
             this.lstChar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.lstChar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lstChar.CausesValidation = false;
-            this.lstChar.Font = new System.Drawing.Font("黑体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lstChar.Font = new System.Drawing.Font("黑体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lstChar.FullRowSelect = true;
             this.lstChar.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstChar.HideSelection = false;
@@ -169,18 +165,63 @@
             listViewItem5,
             listViewItem6});
             this.lstChar.LabelWrap = false;
-            this.lstChar.Location = new System.Drawing.Point(3, 74);
+            this.lstChar.Location = new System.Drawing.Point(24, 45);
             this.lstChar.Margin = new System.Windows.Forms.Padding(0);
             this.lstChar.MultiSelect = false;
             this.lstChar.Name = "lstChar";
             this.lstChar.Scrollable = false;
             this.lstChar.ShowGroups = false;
-            this.lstChar.Size = new System.Drawing.Size(188, 80);
+            this.lstChar.ShowItemToolTips = true;
+            this.lstChar.Size = new System.Drawing.Size(56, 132);
             this.lstChar.TabIndex = 24;
             this.lstChar.TabStop = false;
             this.lstChar.UseCompatibleStateImageBehavior = false;
             this.lstChar.View = System.Windows.Forms.View.List;
             this.lstChar.SelectedIndexChanged += new System.EventHandler(this.lstChar_SelectedIndexChanged);
+            // 
+            // btnCilckThrough
+            // 
+            this.btnCilckThrough.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnCilckThrough.FlatAppearance.BorderSize = 0;
+            this.btnCilckThrough.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Violet;
+            this.btnCilckThrough.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCilckThrough.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCilckThrough.Location = new System.Drawing.Point(145, 64);
+            this.btnCilckThrough.Name = "btnCilckThrough";
+            this.btnCilckThrough.Size = new System.Drawing.Size(55, 28);
+            this.btnCilckThrough.TabIndex = 25;
+            this.btnCilckThrough.TabStop = false;
+            this.btnCilckThrough.Text = "穿越";
+            this.btnCilckThrough.UseMnemonic = false;
+            this.btnCilckThrough.UseVisualStyleBackColor = false;
+            this.btnCilckThrough.Click += new System.EventHandler(this.btnCilckThrough_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(143, 6);
+            // 
+            // 秘术师ToolStripMenuItem
+            // 
+            this.秘术师ToolStripMenuItem.Name = "秘术师ToolStripMenuItem";
+            this.秘术师ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.秘术师ToolStripMenuItem.Text = "秘术师";
+            // 
+            // prgBack
+            // 
+            this.prgBack.BackColor = System.Drawing.Color.LightGray;
+            this.prgBack.Location = new System.Drawing.Point(0, 0);
+            this.prgBack.Name = "prgBack";
+            this.prgBack.Size = new System.Drawing.Size(200, 25);
+            this.prgBack.TabIndex = 26;
+            // 
+            // prgFront
+            // 
+            this.prgFront.BackColor = System.Drawing.Color.Blue;
+            this.prgFront.Location = new System.Drawing.Point(0, 0);
+            this.prgFront.Name = "prgFront";
+            this.prgFront.Size = new System.Drawing.Size(200, 25);
+            this.prgFront.TabIndex = 27;
             // 
             // frmMain
             // 
@@ -188,12 +229,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(234, 153);
+            this.ClientSize = new System.Drawing.Size(200, 150);
             this.ContextMenuStrip = this.MnuRBC;
             this.ControlBox = false;
-            this.Controls.Add(this.lstChar);
             this.Controls.Add(this.labUserInput);
-            this.Controls.Add(this.prgCount);
+            this.Controls.Add(this.prgFront);
+            this.Controls.Add(this.prgBack);
+            this.Controls.Add(this.btnCilckThrough);
+            this.Controls.Add(this.lstChar);
             this.Controls.Add(this.btnSaveSetting);
             this.Controls.Add(this.txtHotKey);
             this.Controls.Add(this.btnReset);
@@ -204,6 +247,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "全能法戒计时";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ffrmmousedown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ffrmmousemove);
@@ -222,9 +266,13 @@
         private System.Windows.Forms.ToolStripMenuItem transparentToolStripMenuItem;
         private System.Windows.Forms.TextBox txtHotKey;
         private System.Windows.Forms.Button btnSaveSetting;
-        private System.Windows.Forms.ProgressBar prgCount;
         private System.Windows.Forms.Timer timPRG;
         private System.Windows.Forms.ListView lstChar;
+        private System.Windows.Forms.Button btnCilckThrough;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem 秘术师ToolStripMenuItem;
+        private System.Windows.Forms.Label prgBack;
+        private System.Windows.Forms.Label prgFront;
     }
 }
 
