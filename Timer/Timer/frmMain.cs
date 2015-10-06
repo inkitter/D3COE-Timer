@@ -324,7 +324,7 @@ namespace Timer
         {
             prgCount.Value = 100;
             iTime = System.Environment.TickCount;
-            iTimeCount = 0;
+            iTimeCount = 1;
             sCOElab();
         }
         //重置按钮
