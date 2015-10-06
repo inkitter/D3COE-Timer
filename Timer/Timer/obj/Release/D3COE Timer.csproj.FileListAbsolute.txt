@@ -1,0 +1,13 @@
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\bin\Release\D3COE Timer.exe.config
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\bin\Release\D3COE Timer.exe.manifest
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\bin\Release\D3COE Timer.application
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\bin\Release\D3COE Timer.exe
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\bin\Release\D3COE Timer.pdb
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\Timer.frmMain.resources
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE.Properties.Resources.resources
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.csproj.GenerateResource.Cache
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.exe.manifest
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.application
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.exe
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.pdb
+C:\Users\Inkit\Source\Repos\D3COE Timer\Timer\Timer\obj\Release\D3COE Timer.csprojResolveAssemblyReference.cache

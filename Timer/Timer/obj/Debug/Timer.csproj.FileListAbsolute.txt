@@ -1,0 +1,8 @@
+D:\GitHub\Timer_Cs\Timer\Timer\bin\Debug\Timer.exe.config
+D:\GitHub\Timer_Cs\Timer\Timer\bin\Debug\Timer.exe
+D:\GitHub\Timer_Cs\Timer\Timer\bin\Debug\Timer.pdb
+D:\GitHub\Timer_Cs\Timer\Timer\obj\Debug\Timer.Properties.Resources.resources
+D:\GitHub\Timer_Cs\Timer\Timer\obj\Debug\Timer.csproj.GenerateResource.Cache
+D:\GitHub\Timer_Cs\Timer\Timer\obj\Debug\Timer.exe
+D:\GitHub\Timer_Cs\Timer\Timer\obj\Debug\Timer.pdb
+D:\GitHub\Timer_Cs\Timer\Timer\obj\Debug\Timer.frmMain.resources
