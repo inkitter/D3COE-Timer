@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.IO;
+using System.Drawing;
+//using System.Linq;
+//using System.ComponentModel;
+//using System.Data;
+//using System.Threading.Tasks;
 
 namespace Timer
 {
@@ -303,7 +303,8 @@ namespace Timer
         }//快捷键txt改变
         private void fhotkeyChange() //快捷键过程
         {
-            System.Windows.Forms.Keys key = (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), txtHotKey.Text);
+            txtHotKey.BackColor = Color.Silver;
+            Keys key = (Keys)Enum.Parse(typeof(Keys), txtHotKey.Text);
             try
             {
                 UnregisterHotKey(Handle, keyid);
@@ -323,6 +324,7 @@ namespace Timer
                 }
                 catch
                 {
+                    txtHotKey.BackColor = Color.Red;
                 }
                 finally
                 {
