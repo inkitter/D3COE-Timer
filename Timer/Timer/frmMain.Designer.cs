@@ -123,7 +123,7 @@
             this.labUserInput.Text = "lab";
             this.labUserInput.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labUserInput.UseMnemonic = false;
-            this.labUserInput.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
+            //this.labUserInput.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
             // 
             // txtHotKey
             // 

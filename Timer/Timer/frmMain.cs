@@ -16,7 +16,7 @@ namespace Timer
     public partial class frmMain : Form
     {
         public class HotKeys
-        {            
+        {
             Dictionary<int, HotKeyCallBackHanlder> keymap = new Dictionary<int, HotKeyCallBackHanlder>();
             public delegate void HotKeyCallBackHanlder();
             public enum HotkeyModifiers
@@ -37,10 +37,7 @@ namespace Timer
                         callback();
                 }
             }
-        }
-
-        //全局快捷键类
-
+        }//全局快捷键类
         public class IniFile
         {
             private string FFileName;
@@ -51,80 +48,34 @@ namespace Timer
             StringBuilder lpReturnedString, int nSize, string lpFileName);
             [DllImport("kernel32")]
             private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
-
-           
-
-            public IniFile(string filename)
-            {
-                FFileName = filename;
-            }
+            public IniFile(string filename) { FFileName = filename; }
             public int ReadInt(string section, string key, int def)
-            {
-                return GetPrivateProfileInt(section, key, def, FFileName);
-            }
+            { return GetPrivateProfileInt(section, key, def, FFileName); }
             public string ReadString(string section, string key, string def)
             {
                 StringBuilder temp = new StringBuilder(1024);
-
                 GetPrivateProfileString(section, key, def, temp, 1024, FFileName); return temp.ToString();
             }
             public void WriteInt(string section, string key, int iVal)
-            {
-                WritePrivateProfileString(section, key, iVal.ToString(), FFileName);
-            }
+            { WritePrivateProfileString(section, key, iVal.ToString(), FFileName); }
             public void WriteString(string section, string key, string strVal)
-            {
-                WritePrivateProfileString(section, key, strVal, FFileName);
-            }
+            { WritePrivateProfileString(section, key, strVal, FFileName); }
             public void DelKey(string section, string key)
-            {
-                WritePrivateProfileString(section, key, null, FFileName);
-            }
+            { WritePrivateProfileString(section, key, null, FFileName); }
             public void DelSection(string section)
-            {
-                WritePrivateProfileString(section, null, null, FFileName);
-            }
-        }
-        //ini文件类
-        //点击穿越
-        public enum GWL
-        {
-            ExStyle = -20
-        }
+            { WritePrivateProfileString(section, null, null, FFileName); }
+        }//ini文件类
 
-        public enum WS_EX
-        {
-            Transparent = 0x20,
-            Layered = 0x80000
-        }
-
-        public enum LWA
-        {
-            ColorKey = 0x1,
-            Alpha = 0x2
-        }
+        public enum GWL { ExStyle = -20 }
+        public enum WS_EX { Transparent = 0x20, Layered = 0x80000 }
+        public enum LWA { ColorKey = 0x1, Alpha = 0x2 }
         [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
         public static extern int GetWindowLong(IntPtr hWnd, GWL nIndex);
         [DllImport("user32.dll", EntryPoint = "SetWindowLong")]
         public static extern int SetWindowLong(IntPtr hWnd, GWL nIndex, int dwNewLong);
         [DllImport("user32.dll", EntryPoint = "SetLayeredWindowAttributes")]
-        public static extern bool SetLayeredWindowAttributes(IntPtr hWnd, int crKey, byte alpha, LWA dwFlags);
-        //点击穿越
+        public static extern bool SetLayeredWindowAttributes(IntPtr hWnd, int crKey, byte alpha, LWA dwFlags);        //点击穿越
 
-        HotKeys h = new HotKeys();
-        const int WM_KEYDOWN = 0x0100;
-        const int WM_KEYUP = 0x0101;
-        const int WM_CHAR = 0x0102;
-        [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-        [DllImport("user32.dll", EntryPoint = "FindWindowEx")]
-        private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
-        [DllImport("user32.dll", EntryPoint = "PostMessage")]
-        private static extern int PostMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
-        [DllImport("user32.dll", EntryPoint = "SendMessage")]
-        private static extern int SendMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
-        [DllImport("user32.dll", EntryPoint = "WindowFromPoint")]
-        private static extern IntPtr WindowFromPoint(int px, int py);
         [DllImport("kernel32")]
         private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
         [DllImport("user32.dll")]
@@ -132,15 +83,29 @@ namespace Timer
         [DllImport("user32.dll")]
         static extern bool UnregisterHotKey(IntPtr hWnd, int id);
         //winAPI声明
+        //HotKeys h = new HotKeys();
+        //const int WM_KEYDOWN = 0x0100;
+        //const int WM_KEYUP = 0x0101;
+        //const int WM_CHAR = 0x0102;
+        //[DllImport("user32.dll", EntryPoint = "FindWindow")]
+        //private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        //[DllImport("user32.dll", EntryPoint = "FindWindowEx")]
+        //private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+        //[DllImport("user32.dll", EntryPoint = "PostMessage")]
+        //private static extern int PostMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
+        //[DllImport("user32.dll", EntryPoint = "SendMessage")]
+        //private static extern int SendMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
+        //[DllImport("user32.dll", EntryPoint = "WindowFromPoint")]
+        //private static extern IntPtr WindowFromPoint(int px, int py);
+
 
         delegate void SetTextCallback(string text);
-
         private Point offset;
         Thread tPRG;
         static int iCOEi = 0; //序列索引号
         static int iCOEmax = 3;
         static int[] iCOEc = new int[] { 0, 1, 2, 4, 5 }; //0=奥术 1=冰霜 2=火焰 3=神圣 4=闪电 5=物理 6=毒性
-        static Boolean bShowBtn=true;
+        //static Boolean bShowBtn=true;
         static int iTime,iTimeCount;
         IniFile finiset = new IniFile(".\\D3COE.ini");
         static int keyid = 202;
@@ -154,18 +119,17 @@ namespace Timer
         private void frmMain_Load(object sender, EventArgs e)
         {
             iniread();
-            sReset();
-            System.Windows.Forms.Keys key = (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), txtHotKey.Text);
+            btnReset_Click(null, null);
+            Keys key = (Keys)Enum.Parse(typeof(Keys), txtHotKey.Text);
             fhotkeyChange();
             tPRG = new Thread(tPRGsub);
             tPRG.Start();
             prgBack.Parent = this;
             prgFront.Parent = prgBack;
             labUserInput.Parent = prgBack;
-            //prgFront.SendToBack();
-        }
+        }//窗口载入
 
-        private void tPRGsub()
+        private void tPRGsub() //标签与进度条线程
         {
             {
                 if (prgFront.InvokeRequired)
@@ -233,56 +197,55 @@ namespace Timer
                 iCOEi = 0;
             }
             catch { return; }
-            sReset();
-        }
-
-
+            btnReset_Click(null, null);
+        }//listview切换职业循环
         private void sCOElab()
         {
             switch (iCOEc[iCOEi])
             {
                 case 0:
-                    labUserInput.Text = "奥术";
-                    labUserInput.ForeColor = System.Drawing.Color.Purple;
-                    prgFront.BackColor = System.Drawing.Color.Purple;
-                    fPlaySound("奥术");
+                    sSetColorSound("奥术", System.Drawing.Color.Purple);
                     break;
                 case 1:
-                    labUserInput.Text = "冰霜";
-                    labUserInput.ForeColor = System.Drawing.Color.DeepSkyBlue;
-                    prgFront.BackColor = System.Drawing.Color.DeepSkyBlue;
-                    fPlaySound("冰霜");
+                    sSetColorSound("冰霜", System.Drawing.Color.DeepSkyBlue);
                     break;
                 case 2:
-                    labUserInput.Text = "火焰";
-                    labUserInput.ForeColor = System.Drawing.Color.Red;
-                    prgFront.BackColor = System.Drawing.Color.Red;
-                    fPlaySound("火焰");
+                    sSetColorSound("火焰", System.Drawing.Color.Red);
                     break;
                 case 3:
-                    labUserInput.Text = "神圣";
-                    labUserInput.ForeColor = System.Drawing.Color.Yellow;
-                    prgFront.BackColor = System.Drawing.Color.Yellow;
-                    fPlaySound("神圣");
+                    sSetColorSound("神圣", System.Drawing.Color.Yellow);
                     break;
                 case 4:
-                    labUserInput.Text = "闪电";
-                    labUserInput.ForeColor = System.Drawing.Color.White;
-                    prgFront.BackColor = System.Drawing.Color.White;
-                    fPlaySound("闪电");
+                    sSetColorSound("闪电",System.Drawing.Color.White);
                     break;
                 case 5:
-                    labUserInput.Text = "物理";
-                    labUserInput.ForeColor = System.Drawing.Color.Gray;
-                    prgFront.BackColor = System.Drawing.Color.Gray;
-                    fPlaySound("物理");
+                    sSetColorSound("物理", System.Drawing.Color.Gray);
                     break;
                 case 6:
-                    labUserInput.Text = "毒性";
-                    labUserInput.ForeColor = System.Drawing.Color.Green;
-                    prgFront.BackColor = System.Drawing.Color.Green;
-                    fPlaySound("毒性");
+                    sSetColorSound("毒性", System.Drawing.Color.Green);
                     break;
+            }
+        }//设定颜色、声音
+        private void sSetColorSound(string COEtype,Color c)
+        {
+            labUserInput.Text = COEtype;
+            fPlaySound(COEtype);
+            labUserInput.ForeColor = c;
+            prgFront.BackColor = c;
+        }//设定颜色、声音过程
+        private void fPlaySound(string playtype)     //声音播放
+        {
+            try
+            {
+                System.Media.SoundPlayer play = new System.Media.SoundPlayer();
+                play.SoundLocation = Directory.GetCurrentDirectory() + "/" + playtype + ".wav";
+                play.Load();
+                play.Play();
+                play.Dispose();
+            }
+            catch
+            {
+
             }
         }
 
@@ -301,9 +264,7 @@ namespace Timer
             {
 
             }
-        }
-        //读取ini文件
-
+        }        //读取ini文件
         private void iniwrite()
         {
             try
@@ -317,16 +278,13 @@ namespace Timer
             {
 
             }
-        }
-        //保存ini文件
-
-        public void OnHotkey()
+        }        //保存ini文件
+        private void btnSaveSetting_Click(object sender, EventArgs e)
         {
-            btnReset_Click(null,null);
-        }
-        //全局快捷键触发事件
+            iniwrite();
+        } //保存按钮
 
-        protected override void WndProc(ref Message m)//监视Windows消息
+        protected override void WndProc(ref Message m)//监视Windows快捷键消息
         {
             const int WM_HOTKEY = 0x0312;//按快捷键
             switch (m.Msg)
@@ -338,145 +296,12 @@ namespace Timer
             }
             base.WndProc(ref m);
         }
-
-        private void ffrmmousedown(object sender, MouseEventArgs e)
-        {
-            if (MouseButtons.Left != e.Button) return;
-            Point cur = this.PointToScreen(e.Location);
-            offset = new Point(cur.X - this.Left, cur.Y - this.Top);
-        }
-        private void ffrmmousemove(object sender, MouseEventArgs e)
-        {
-            if (MouseButtons.Left != e.Button) return;
-            Point cur = MousePosition;
-            this.Location = new Point(cur.X - offset.X, cur.Y - offset.Y);
-        }
-        //点击任意位置移动窗体
-
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            sReset();
-        }
-
-        private void sReset()
-        {
-            prgFront.Left = 0;
-            iTime = System.Environment.TickCount;
-            iTimeCount = 1;
-            sCOElab();
-        }
-        //重置按钮
-
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-                Application.Exit();
-                Environment.Exit(0);
-        }
-        //下拉菜单-Exit
-
-
-        private void sFormClose()
-        {
-            Application.Exit();
-            Environment.Exit(0);
-            try
-            {
-                UnregisterHotKey(Handle, keyid);
-            }
-            catch
-            {
-
-            }
-            //try
-            //{
-            //    tPRG.Abort();
-            //}
-            //catch
-            //{
-
-            //}
-            ////防止退出线程未关闭
-        }
-
-        private void topToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (topToolStripMenuItem.Checked == true) { 
-                this.TopMost = true; 
-                //this.Opacity = 0.6;
-                transparentToolStripMenuItem.Visible = true;
-                transparentToolStripMenuItem.Checked = false;
-            }
-            else { 
-                this.TopMost = false; 
-                this.Opacity = 1;
-                transparentToolStripMenuItem.Visible = false;
-                transparentToolStripMenuItem.Checked = false;
-            }
-        }
-        //置顶并改变透明度
-
-
-        private void labTime_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (bShowBtn == true) { bShowBtn = false; this.Width = 296; this.Height = 90; }
-            else { bShowBtn = true; this.Width = 296; this.Height = 367; }
-        }
-
-        private void transparentToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (transparentToolStripMenuItem.Checked == true){
-                transparentToolStripMenuItem.Checked = false;
-            }
-            else
-            {
-                transparentToolStripMenuItem.Checked = true;
-            }
-            if (transparentToolStripMenuItem.Checked==true){
-                this.Opacity = 0.6;
-            }
-            else{
-                this.Opacity=1;
-            }
-        }
-
-
-        private void txtKPTime1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            TextBox sendertxtBox = (TextBox)sender;
-            txtKPTime_Keypress(sender, e, sendertxtBox);
-        }
-
-        private void txtKPTime_Keypress(object sender, KeyPressEventArgs e, TextBox sendertxtBox)
-        {
-            if (((int)e.KeyChar < 48 || (int)e.KeyChar > 57) && (int)e.KeyChar != 8)
-                e.Handled = true;
-        }
-
-        private void fPlaySound(string playtype)     //1=开始 2=停止
-        {
-            try
-            {
-                System.Media.SoundPlayer play=new System.Media.SoundPlayer();
-                play.SoundLocation = Directory.GetCurrentDirectory() + "/"+playtype+".wav";
-                play.Load();
-                play.Play();
-                play.Dispose();
-            }
-            catch
-            {
-                
-            }
-        }
-
         private void txtHotKey_KeyDown(object sender, KeyEventArgs e)
         {
             txtHotKey.Text = e.KeyData.ToString();
             fhotkeyChange();
-        }
-
-        private void fhotkeyChange()
+        }//快捷键txt改变
+        private void fhotkeyChange() //快捷键过程
         {
             System.Windows.Forms.Keys key = (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), txtHotKey.Text);
             try
@@ -501,23 +326,25 @@ namespace Timer
                 }
                 finally
                 {
-                    keyid=i;
+                    keyid = i;
                     i = 221;
                 }
             }
         }
 
-        private void btnSaveSetting_Click(object sender, EventArgs e)
+        private void ffrmmousedown(object sender, MouseEventArgs e)  //点击任意位置移动窗体
         {
-            iniwrite();
+            if (MouseButtons.Left != e.Button) return;
+            Point cur = this.PointToScreen(e.Location);
+            offset = new Point(cur.X - this.Left, cur.Y - this.Top);
         }
-
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void ffrmmousemove(object sender, MouseEventArgs e)   //点击任意位置移动窗体
         {
-            sFormClose();
+            if (MouseButtons.Left != e.Button) return;
+            Point cur = MousePosition;
+            this.Location = new Point(cur.X - offset.X, cur.Y - offset.Y);
         }
-
-        private void btnCilckThrough_Click(object sender, EventArgs e)
+        private void btnCilckThrough_Click(object sender, EventArgs e) //点击穿越与恢复
         {
             if (this.Height == 25)
             {
@@ -543,12 +370,90 @@ namespace Timer
                 //this.Opacity = 0.8;
             }
         }
-
-
-        private void labUserInput_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
-            if (this.Height == 150) { this.Height = 25; }
-            else {this.Height = 150; }
-        }
+            prgFront.Left = 0;
+            iTime = System.Environment.TickCount;
+            iTimeCount = 1;
+            sCOElab();
+        }        //重置按钮
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sFormClose();
+        }        //下拉菜单-Exit
+        private void topToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (topToolStripMenuItem.Checked == true) { 
+                this.TopMost = true; 
+                //this.Opacity = 0.6;
+                transparentToolStripMenuItem.Visible = true;
+                transparentToolStripMenuItem.Checked = false;
+            }
+            else { 
+                this.TopMost = false; 
+                this.Opacity = 1;
+                transparentToolStripMenuItem.Visible = false;
+                transparentToolStripMenuItem.Checked = false;
+            }
+        }        //下拉菜单-置顶
+        private void transparentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (transparentToolStripMenuItem.Checked == true){
+                transparentToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                transparentToolStripMenuItem.Checked = true;
+            }
+            if (transparentToolStripMenuItem.Checked==true){
+                this.Opacity = 0.6;
+            }
+            else{
+                this.Opacity=1;
+            }
+        }//下拉菜单-透明度
+
+
+        private void sFormClose()
+        {
+            Application.Exit();
+            Environment.Exit(0);
+            try
+            {
+                UnregisterHotKey(Handle, keyid);
+            }
+            catch
+            {
+
+            }
+        }//退出与清理
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            sFormClose();
+        }  //关闭清理
+
+        //private void txtKPTime1_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+        //    TextBox sendertxtBox = (TextBox)sender;
+        //    txtKPTime_Keypress(sender, e, sendertxtBox);
+        //}
+
+        //private void txtKPTime_Keypress(object sender, KeyPressEventArgs e, TextBox sendertxtBox)
+        //{
+        //    if (((int)e.KeyChar < 48 || (int)e.KeyChar > 57) && (int)e.KeyChar != 8)
+        //        e.Handled = true;
+        //}
+        //public void OnHotkey()
+        //{
+        //    btnReset_Click(null,null);
+        //}        //全局快捷键触发事件
+
+
+        //private void labUserInput_MouseDoubleClick(object sender, MouseEventArgs e)
+        //{
+        //    if (this.Height == 150) { this.Height = 25; }
+        //    else {this.Height = 150; }
+        //}
     }
 }

@@ -23,3 +23,16 @@ C:\Users\inkit\Documents\GitHubVisualStudio\D3COE-Timer\Timer\Timer\obj\Release\
 C:\Users\inkit\Documents\GitHubVisualStudio\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.csproj.GenerateResource.Cache
 C:\Users\inkit\Documents\GitHubVisualStudio\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.exe.manifest
 C:\Users\inkit\Documents\GitHubVisualStudio\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.application
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\bin\Release\D3COE Timer.exe.config
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.exe
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.pdb
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\bin\Release\D3COE Timer.exe.manifest
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\bin\Release\D3COE Timer.application
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\bin\Release\D3COE Timer.exe
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\bin\Release\D3COE Timer.pdb
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.csprojResolveAssemblyReference.cache
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\Timer.frmMain.resources
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE.Properties.Resources.resources
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.csproj.GenerateResource.Cache
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.exe.manifest
+C:\Users\Inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.application
