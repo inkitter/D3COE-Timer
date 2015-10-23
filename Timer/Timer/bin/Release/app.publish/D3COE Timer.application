@@ -7,7 +7,7 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="D3COE Timer.exe.manifest" size="3912">
+    <dependentAssembly dependencyType="install" codebase="Application Files\D3COE Timer_1_1_0_0\D3COE Timer.exe.manifest" size="3912">
       <assemblyIdentity name="D3COE Timer.exe" version="1.1.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>

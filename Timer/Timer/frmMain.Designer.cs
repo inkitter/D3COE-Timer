@@ -47,7 +47,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.labUserInput = new System.Windows.Forms.Label();
             this.txtHotKey = new System.Windows.Forms.TextBox();
             this.btnSaveSetting = new System.Windows.Forms.Button();
@@ -81,15 +80,14 @@
             this.MnuRBC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem,
             this.topToolStripMenuItem,
-            this.transparentToolStripMenuItem,
-            this.toolStripMenuItem2});
+            this.transparentToolStripMenuItem});
             this.MnuRBC.Name = "MnuRBC";
-            this.MnuRBC.Size = new System.Drawing.Size(147, 76);
+            this.MnuRBC.Size = new System.Drawing.Size(153, 92);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -97,22 +95,17 @@
             // 
             this.topToolStripMenuItem.CheckOnClick = true;
             this.topToolStripMenuItem.Name = "topToolStripMenuItem";
-            this.topToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.topToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.topToolStripMenuItem.Text = "Stay Top";
             this.topToolStripMenuItem.Click += new System.EventHandler(this.topToolStripMenuItem_Click);
             // 
             // transparentToolStripMenuItem
             // 
             this.transparentToolStripMenuItem.Name = "transparentToolStripMenuItem";
-            this.transparentToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.transparentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.transparentToolStripMenuItem.Text = "Transparent";
             this.transparentToolStripMenuItem.Visible = false;
             this.transparentToolStripMenuItem.Click += new System.EventHandler(this.transparentToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(143, 6);
             // 
             // labUserInput
             // 
@@ -273,7 +266,6 @@
         private System.Windows.Forms.Button btnSaveSetting;
         private System.Windows.Forms.ListView lstChar;
         private System.Windows.Forms.Button btnCilckThrough;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.Label prgBack;
         private System.Windows.Forms.Label prgFront;
         private System.Windows.Forms.Label labError;
