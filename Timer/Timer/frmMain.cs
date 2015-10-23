@@ -101,9 +101,10 @@ namespace Timer
 
         delegate void SetTextCallback(string text);
         private Point offset;
-        Thread tPRG;
+        private Thread tPRG=null;
         static int iCOEi = 0; //序列索引号
         static int iCOEmax = 3;
+        static int iHotkeyi = 202;
         static int[] iCOEc = new int[] { 0, 1, 2, 4, 5 }; //0=奥术 1=冰霜 2=火焰 3=神圣 4=闪电 5=物理 6=毒性
         //static Boolean bShowBtn=true;
         static int iTime,iTimeCount;
@@ -122,41 +123,38 @@ namespace Timer
             btnReset_Click(null, null);
             Keys key = (Keys)Enum.Parse(typeof(Keys), txtHotKey.Text);
             fhotkeyChange();
-            tPRG = new Thread(tPRGsub);
+            tPRG = new Thread(new ThreadStart(tPRGsub));
             tPRG.Start();
             prgBack.Parent = this;
             prgFront.Parent = prgBack;
-            labUserInput.Parent = prgBack;
+            labUserInput.Parent = prgFront;
         }//窗口载入
 
         private void tPRGsub() //标签与进度条线程
         {
+            if (prgFront.InvokeRequired)
             {
-                if (prgFront.InvokeRequired)
+                DoDataDelegate d = tPRGsub;
+                prgFront.Invoke(d);
+            }
+            else
+            {
+                while (1 == 1)
                 {
-                    DoDataDelegate d = tPRGsub;
-                    prgFront.Invoke(d);
-                }
-                else
-                {
-                    while (1== 1)
+                    if (System.Environment.TickCount - iTime < 4000 * iTimeCount)
                     {
-                        Application.DoEvents();
-                        if (System.Environment.TickCount -  iTime < 4000*iTimeCount)
-                        {
-                            prgFront.Left = prgFront.Left - 2;
-                            Thread.Sleep(40);
-                        }
-                        else
-                        {
-                            iCOEi = iCOEi + 1;
-                            if (iCOEi > iCOEmax) { iCOEi = 0; }
-                            sCOElab();  //推送到label显示系别
-                            prgFront.Left = 0;
-                            iTimeCount = iTimeCount + 1;
-                        }
-
+                        prgFront.Left = prgFront.Left - 2;
+                        Thread.Sleep(40);
                     }
+                    else
+                    {
+                        iCOEi = iCOEi + 1;
+                        if (iCOEi > iCOEmax) { iCOEi = 0; }
+                        sCOElab();  //推送到label显示系别
+                        prgFront.Left = 0;
+                        iTimeCount = iTimeCount + 1;
+                    }
+                    Application.DoEvents();
                 }
             }
         }
@@ -201,37 +199,84 @@ namespace Timer
         }//listview切换职业循环
         private void sCOElab()
         {
+            string labText="";
+            Color fcolor= System.Drawing.Color.Purple, bcolor= System.Drawing.Color.DeepSkyBlue;
             switch (iCOEc[iCOEi])
             {
                 case 0:
-                    sSetColorSound("奥术", System.Drawing.Color.Purple);
+                    labText = "奥术";
+                    fcolor=System.Drawing.Color.Purple;
                     break;
                 case 1:
-                    sSetColorSound("冰霜", System.Drawing.Color.DeepSkyBlue);
+                    labText = "冰霜";
+                    fcolor = System.Drawing.Color.DeepSkyBlue;
                     break;
                 case 2:
-                    sSetColorSound("火焰", System.Drawing.Color.Red);
+                    labText = "火焰";
+                    fcolor = System.Drawing.Color.Red;
                     break;
                 case 3:
-                    sSetColorSound("神圣", System.Drawing.Color.Yellow);
+                    labText = "神圣";
+                    fcolor = System.Drawing.Color.Yellow;
                     break;
                 case 4:
-                    sSetColorSound("闪电",System.Drawing.Color.White);
+                    labText = "闪电";
+                    fcolor = System.Drawing.Color.White;
                     break;
                 case 5:
-                    sSetColorSound("物理", System.Drawing.Color.Gray);
+                    labText = "物理";
+                    fcolor = System.Drawing.Color.Gray;
                     break;
                 case 6:
-                    sSetColorSound("毒性", System.Drawing.Color.Green);
+                    labText = "毒性";
+                    fcolor = System.Drawing.Color.Green;
                     break;
             }
+            int colindex = 0;        
+            if (iCOEi < iCOEmax) { colindex = iCOEc[iCOEi + 1]; } else { colindex = iCOEc[0]; }
+            switch (colindex)
+            {
+                case 7:
+                case 0:
+                    bcolor = System.Drawing.Color.Purple;
+                    break;
+                case 1:
+                    bcolor = System.Drawing.Color.DeepSkyBlue;
+                    break;
+                case 2:
+                    bcolor = System.Drawing.Color.Red;
+                    break;
+                case 3:
+                    bcolor = System.Drawing.Color.Yellow;
+                    break;
+                case 4:
+                    bcolor = System.Drawing.Color.White;
+                    break;
+                case 5:
+                    bcolor = System.Drawing.Color.Gray;
+                    break;
+                case 6:
+                    bcolor = System.Drawing.Color.Green;
+                    break;
+            }
+            sSetColorSound(labText, fcolor, bcolor);
         }//设定颜色、声音
-        private void sSetColorSound(string COEtype,Color c)
+        private void sSetColorSound(string COEtype, Color prgFrontColor, Color prgBackColor)
         {
             labUserInput.Text = COEtype;
             fPlaySound(COEtype);
-            labUserInput.ForeColor = c;
-            prgFront.BackColor = c;
+            labUserInput.ForeColor = prgBackColor;
+            prgFront.BackColor = prgFrontColor;
+            prgBack.BackColor = prgBackColor;
+            //if (prgBack.InvokeRequired)
+            //{
+            //    DoDataDelegate d = tPRGsub;
+            //    prgBack.Invoke(d);
+            //}
+            //else
+            //{
+            //    prgBack.BackColor = prgBackColor;
+            //}
         }//设定颜色、声音过程
         private void fPlaySound(string playtype)     //声音播放
         {
@@ -245,7 +290,7 @@ namespace Timer
             }
             catch
             {
-
+                //labError.Text = "Error";
             }
         }
 
@@ -262,7 +307,7 @@ namespace Timer
             }
             catch
             {
-
+                //labError.Text = "Error";
             }
         }        //读取ini文件
         private void iniwrite()
@@ -276,7 +321,7 @@ namespace Timer
             }
             catch
             {
-
+                //labError.Text = "Error";
             }
         }        //保存ini文件
         private void btnSaveSetting_Click(object sender, EventArgs e)
@@ -290,8 +335,8 @@ namespace Timer
             switch (m.Msg)
             {
                 case WM_HOTKEY:
-                    if (this.Height == 25) { btnCilckThrough_Click(null, null); return; }
-                    btnReset_Click(null, null);//调用主处理程序
+                    if (m.WParam.ToInt32()== keyid) { btnReset_Click(null, null); }
+                    if (m.WParam.ToInt32() == keyid + 1) { btnCilckThrough_Click(null, null); return; }
                     break;
             }
             base.WndProc(ref m);
@@ -313,13 +358,15 @@ namespace Timer
             {
 
             }
-            for (int i = 202; i < 213; i++)
+
+            for (int i=0; i < 213; i++)
             {
                 try
                 {
                     if (txtHotKey.Text != "Escape")
                     {
                         RegisterHotKey(Handle, i, 0, key);
+                        RegisterHotKey(Handle, i + 1, 2, key);
                     }
                 }
                 catch
@@ -378,6 +425,7 @@ namespace Timer
             iTime = System.Environment.TickCount;
             iTimeCount = 1;
             sCOElab();
+            if (iCOEi == iCOEmax) { iCOEi = 0; } else { iCOEi = iCOEi + 1; }
         }        //重置按钮
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -430,32 +478,16 @@ namespace Timer
 
             }
         }//退出与清理
+
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             sFormClose();
         }  //关闭清理
 
-        //private void txtKPTime1_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    TextBox sendertxtBox = (TextBox)sender;
-        //    txtKPTime_Keypress(sender, e, sendertxtBox);
-        //}
-
-        //private void txtKPTime_Keypress(object sender, KeyPressEventArgs e, TextBox sendertxtBox)
-        //{
-        //    if (((int)e.KeyChar < 48 || (int)e.KeyChar > 57) && (int)e.KeyChar != 8)
-        //        e.Handled = true;
-        //}
-        //public void OnHotkey()
-        //{
-        //    btnReset_Click(null,null);
-        //}        //全局快捷键触发事件
-
-
-        //private void labUserInput_MouseDoubleClick(object sender, MouseEventArgs e)
-        //{
-        //    if (this.Height == 150) { this.Height = 25; }
-        //    else {this.Height = 150; }
-        //}
+        private void labUserInput_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.Height == 150) { this.Height = 25; }
+            else { this.Height = 150; }
+        }
     }
 }

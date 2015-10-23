@@ -47,16 +47,15 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transparentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.labUserInput = new System.Windows.Forms.Label();
             this.txtHotKey = new System.Windows.Forms.TextBox();
             this.btnSaveSetting = new System.Windows.Forms.Button();
-            this.timPRG = new System.Windows.Forms.Timer(this.components);
             this.lstChar = new System.Windows.Forms.ListView();
             this.btnCilckThrough = new System.Windows.Forms.Button();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.秘术师ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prgBack = new System.Windows.Forms.Label();
             this.prgFront = new System.Windows.Forms.Label();
+            this.labError = new System.Windows.Forms.Label();
             this.MnuRBC.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,10 +82,9 @@
             this.exitToolStripMenuItem,
             this.topToolStripMenuItem,
             this.transparentToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.秘术师ToolStripMenuItem});
+            this.toolStripMenuItem2});
             this.MnuRBC.Name = "MnuRBC";
-            this.MnuRBC.Size = new System.Drawing.Size(147, 98);
+            this.MnuRBC.Size = new System.Drawing.Size(147, 76);
             // 
             // exitToolStripMenuItem
             // 
@@ -111,19 +109,24 @@
             this.transparentToolStripMenuItem.Visible = false;
             this.transparentToolStripMenuItem.Click += new System.EventHandler(this.transparentToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(143, 6);
+            // 
             // labUserInput
             // 
             this.labUserInput.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labUserInput.BackColor = System.Drawing.Color.Transparent;
             this.labUserInput.Font = new System.Drawing.Font("黑体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labUserInput.Location = new System.Drawing.Point(69, 0);
+            this.labUserInput.Location = new System.Drawing.Point(140, 0);
             this.labUserInput.Name = "labUserInput";
-            this.labUserInput.Size = new System.Drawing.Size(67, 25);
+            this.labUserInput.Size = new System.Drawing.Size(60, 25);
             this.labUserInput.TabIndex = 3;
             this.labUserInput.Text = "lab";
             this.labUserInput.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labUserInput.UseMnemonic = false;
-            //this.labUserInput.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
+            this.labUserInput.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
             // 
             // txtHotKey
             // 
@@ -196,17 +199,6 @@
             this.btnCilckThrough.UseVisualStyleBackColor = false;
             this.btnCilckThrough.Click += new System.EventHandler(this.btnCilckThrough_Click);
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(143, 6);
-            // 
-            // 秘术师ToolStripMenuItem
-            // 
-            this.秘术师ToolStripMenuItem.Name = "秘术师ToolStripMenuItem";
-            this.秘术师ToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.秘术师ToolStripMenuItem.Text = "秘术师";
-            // 
             // prgBack
             // 
             this.prgBack.BackColor = System.Drawing.Color.LightGray;
@@ -214,6 +206,9 @@
             this.prgBack.Name = "prgBack";
             this.prgBack.Size = new System.Drawing.Size(200, 25);
             this.prgBack.TabIndex = 26;
+            this.prgBack.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
+            this.prgBack.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ffrmmousedown);
+            this.prgBack.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ffrmmousemove);
             // 
             // prgFront
             // 
@@ -222,6 +217,15 @@
             this.prgFront.Name = "prgFront";
             this.prgFront.Size = new System.Drawing.Size(200, 25);
             this.prgFront.TabIndex = 27;
+            this.prgFront.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labUserInput_MouseDoubleClick);
+            // 
+            // labError
+            // 
+            this.labError.AutoSize = true;
+            this.labError.Location = new System.Drawing.Point(113, 109);
+            this.labError.Name = "labError";
+            this.labError.Size = new System.Drawing.Size(0, 12);
+            this.labError.TabIndex = 28;
             // 
             // frmMain
             // 
@@ -232,6 +236,7 @@
             this.ClientSize = new System.Drawing.Size(200, 150);
             this.ContextMenuStrip = this.MnuRBC;
             this.ControlBox = false;
+            this.Controls.Add(this.labError);
             this.Controls.Add(this.labUserInput);
             this.Controls.Add(this.prgFront);
             this.Controls.Add(this.prgBack);
@@ -266,13 +271,12 @@
         private System.Windows.Forms.ToolStripMenuItem transparentToolStripMenuItem;
         private System.Windows.Forms.TextBox txtHotKey;
         private System.Windows.Forms.Button btnSaveSetting;
-        private System.Windows.Forms.Timer timPRG;
         private System.Windows.Forms.ListView lstChar;
         private System.Windows.Forms.Button btnCilckThrough;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem 秘术师ToolStripMenuItem;
         private System.Windows.Forms.Label prgBack;
         private System.Windows.Forms.Label prgFront;
+        private System.Windows.Forms.Label labError;
     }
 }
 
