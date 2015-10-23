@@ -104,7 +104,7 @@ namespace Timer
         private Thread tPRG=null;
         static int iCOEi = 0; //序列索引号
         static int iCOEmax = 3;
-        static int iHotkeyi = 202;
+        //static int iHotkeyi = 202;
         static int[] iCOEc = new int[] { 0, 1, 2, 4, 5 }; //0=奥术 1=冰霜 2=火焰 3=神圣 4=闪电 5=物理 6=毒性
         //static Boolean bShowBtn=true;
         static int iTime,iTimeCount;
@@ -120,7 +120,7 @@ namespace Timer
         private void frmMain_Load(object sender, EventArgs e)
         {
             iniread();
-            btnReset_Click(null, null);
+            sReset();
             Keys key = (Keys)Enum.Parse(typeof(Keys), txtHotKey.Text);
             fhotkeyChange();
             tPRG = new Thread(new ThreadStart(tPRGsub));
@@ -129,6 +129,20 @@ namespace Timer
             prgFront.Parent = prgBack;
             labUserInput.Parent = prgFront;
         }//窗口载入
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            if (iCOEi >= iCOEmax) { iCOEi = 0; } else { iCOEi = iCOEi + 1; }
+            sReset();
+        }        //重置按钮
+
+        private void sReset()
+        {
+            prgFront.Left = 0;
+            iTime = System.Environment.TickCount;
+            iTimeCount = 1;
+            sCOElab();
+        }
 
         private void tPRGsub() //标签与进度条线程
         {
@@ -148,11 +162,10 @@ namespace Timer
                     }
                     else
                     {
-                        iCOEi = iCOEi + 1;
-                        if (iCOEi > iCOEmax) { iCOEi = 0; }
                         sCOElab();  //推送到label显示系别
                         prgFront.Left = 0;
                         iTimeCount = iTimeCount + 1;
+                        if (iCOEi > iCOEmax) { iCOEi = 0; } else { iCOEi++; }
                     }
                     Application.DoEvents();
                 }
@@ -193,9 +206,9 @@ namespace Timer
                         break;
                 }
                 iCOEi = 0;
+                sReset();
             }
             catch { return; }
-            btnReset_Click(null, null);
         }//listview切换职业循环
         private void sCOElab()
         {
@@ -268,15 +281,6 @@ namespace Timer
             labUserInput.ForeColor = prgBackColor;
             prgFront.BackColor = prgFrontColor;
             prgBack.BackColor = prgBackColor;
-            //if (prgBack.InvokeRequired)
-            //{
-            //    DoDataDelegate d = tPRGsub;
-            //    prgBack.Invoke(d);
-            //}
-            //else
-            //{
-            //    prgBack.BackColor = prgBackColor;
-            //}
         }//设定颜色、声音过程
         private void fPlaySound(string playtype)     //声音播放
         {
@@ -419,14 +423,6 @@ namespace Timer
                 //this.Opacity = 0.8;
             }
         }
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            prgFront.Left = 0;
-            iTime = System.Environment.TickCount;
-            iTimeCount = 1;
-            sCOElab();
-            if (iCOEi == iCOEmax) { iCOEi = 0; } else { iCOEi = iCOEi + 1; }
-        }        //重置按钮
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
