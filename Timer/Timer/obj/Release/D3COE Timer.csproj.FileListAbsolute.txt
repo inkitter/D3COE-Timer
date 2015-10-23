@@ -35,4 +35,3 @@ C:\Users\inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.
 C:\Users\inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.application
 C:\Users\inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.exe
 C:\Users\inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.pdb
-C:\Users\inkit\Documents\GitHub\D3COE-Timer\Timer\Timer\obj\Release\D3COE Timer.csprojResolveAssemblyReference.cache

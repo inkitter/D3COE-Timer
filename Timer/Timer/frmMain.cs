@@ -104,9 +104,7 @@ namespace Timer
         private Thread tPRG=null;
         static int iCOEi = 0; //序列索引号
         static int iCOEmax = 3;
-        //static int iHotkeyi = 202;
         static int[] iCOEc = new int[] { 0, 1, 2, 4, 5 }; //0=奥术 1=冰霜 2=火焰 3=神圣 4=闪电 5=物理 6=毒性
-        //static Boolean bShowBtn=true;
         static int iTime,iTimeCount;
         IniFile finiset = new IniFile(".\\D3COE.ini");
         static int keyid = 202;
@@ -162,10 +160,11 @@ namespace Timer
                     }
                     else
                     {
-                        sCOElab();  //推送到label显示系别
                         prgFront.Left = 0;
                         iTimeCount = iTimeCount + 1;
-                        if (iCOEi > iCOEmax) { iCOEi = 0; } else { iCOEi++; }
+                        iCOEi++;
+                        if (iCOEi > iCOEmax) { iCOEi = 0; } 
+                        sCOElab();  //推送到label显示系别
                     }
                     Application.DoEvents();
                 }
@@ -249,7 +248,6 @@ namespace Timer
             if (iCOEi < iCOEmax) { colindex = iCOEc[iCOEi + 1]; } else { colindex = iCOEc[0]; }
             switch (colindex)
             {
-                case 7:
                 case 0:
                     bcolor = System.Drawing.Color.Purple;
                     break;
