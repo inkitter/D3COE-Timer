@@ -1,4 +1,4 @@
-﻿namespace Timer
+﻿namespace Inkit.D3COETimer
 {
     partial class frmMain
     {

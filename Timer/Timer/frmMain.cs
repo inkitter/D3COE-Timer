@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Threading;
-using System.Runtime.InteropServices;
-using System.IO;
 using System.Drawing;
-//using System.Linq;
-//using System.ComponentModel;
-//using System.Data;
-//using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
-namespace Timer
+namespace Inkit.D3COETimer
 {
+
     public partial class frmMain : Form
     {
         public class HotKeys
@@ -82,21 +79,6 @@ namespace Timer
         static extern bool RegisterHotKey(IntPtr hWnd, int id, int modifiers, Keys vk);
         [DllImport("user32.dll")]
         static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-        //winAPI声明
-        //HotKeys h = new HotKeys();
-        //const int WM_KEYDOWN = 0x0100;
-        //const int WM_KEYUP = 0x0101;
-        //const int WM_CHAR = 0x0102;
-        //[DllImport("user32.dll", EntryPoint = "FindWindow")]
-        //private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
-        //[DllImport("user32.dll", EntryPoint = "FindWindowEx")]
-        //private static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
-        //[DllImport("user32.dll", EntryPoint = "PostMessage")]
-        //private static extern int PostMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
-        //[DllImport("user32.dll", EntryPoint = "SendMessage")]
-        //private static extern int SendMessage(IntPtr hwnd, uint wMsg, int wParam, int lParam);
-        //[DllImport("user32.dll", EntryPoint = "WindowFromPoint")]
-        //private static extern IntPtr WindowFromPoint(int px, int py);
 
 
         delegate void SetTextCallback(string text);
@@ -482,6 +464,16 @@ namespace Timer
         {
             if (this.Height == 150) { this.Height = 25; }
             else { this.Height = 150; }
+        }
+    }
+    static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmMain());
         }
     }
 }
